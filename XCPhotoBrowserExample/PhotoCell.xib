@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="170" id="KGk-i7-Jjw" customClass="PhotoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="169"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" tag="10" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RP0-gp-Jog">
+                        <rect key="frame" x="13" y="8" width="79" height="75"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="79" id="tT8-QU-b8z"/>
+                            <constraint firstAttribute="height" constant="75" id="uxm-f1-lwH"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-fu-8gS">
+                        <rect key="frame" x="100" y="8" width="79" height="75"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" tag="12" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Qs-yD-JJs">
+                        <rect key="frame" x="187" y="8" width="79" height="75"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" tag="13" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bO-wU-1BT">
+                        <rect key="frame" x="13" y="91" width="79" height="75"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" tag="14" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-un-jen">
+                        <rect key="frame" x="100" y="91" width="79" height="75"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dE2-un-jen" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="090-wS-8rW"/>
+                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="centerY" secondItem="RP0-gp-Jog" secondAttribute="centerY" id="0x0-8q-xFP"/>
+                    <constraint firstItem="dMy-fu-8gS" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="1uQ-Ma-j1K"/>
+                    <constraint firstAttribute="bottom" secondItem="0bO-wU-1BT" secondAttribute="bottom" constant="3.5" id="3EU-5Q-Qcp"/>
+                    <constraint firstItem="dE2-un-jen" firstAttribute="leading" secondItem="0bO-wU-1BT" secondAttribute="trailing" constant="8" id="AYc-0v-D0l"/>
+                    <constraint firstItem="dMy-fu-8gS" firstAttribute="centerY" secondItem="RP0-gp-Jog" secondAttribute="centerY" id="BQ2-Mr-MIf"/>
+                    <constraint firstItem="dMy-fu-8gS" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="Ouc-1q-udj"/>
+                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="V6y-nB-uwy"/>
+                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="leading" secondItem="dMy-fu-8gS" secondAttribute="trailing" constant="8" id="WFI-dK-nAJ"/>
+                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="Wgj-qh-pKh"/>
+                    <constraint firstItem="0bO-wU-1BT" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="aI5-NS-Lo8"/>
+                    <constraint firstItem="dMy-fu-8gS" firstAttribute="leading" secondItem="RP0-gp-Jog" secondAttribute="trailing" constant="8" id="bkC-k8-P2r"/>
+                    <constraint firstItem="0bO-wU-1BT" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="fZz-ba-xvT"/>
+                    <constraint firstItem="0bO-wU-1BT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="ge3-tz-aeF"/>
+                    <constraint firstItem="dE2-un-jen" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="npn-ZE-21Q"/>
+                    <constraint firstItem="RP0-gp-Jog" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ugR-MD-502"/>
+                    <constraint firstItem="0bO-wU-1BT" firstAttribute="centerY" secondItem="dE2-un-jen" secondAttribute="centerY" id="uwv-0L-Wsh"/>
+                    <constraint firstItem="RP0-gp-Jog" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="x63-eN-oDu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="280" y="401"/>
+        </tableViewCell>
+    </objects>
+</document>
