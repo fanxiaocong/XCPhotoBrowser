@@ -22,7 +22,7 @@
 
 #import "UIView+Extension.h"
 
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 
 
 #define K_PLACEHOLDER_IMAGE_NAME  @"empty_picture"
@@ -177,6 +177,7 @@
         self.photoView.frame     = self.photoView.calF;
         
 #warning 注：此处图片的URL是利用SDWebImage来实现加载的...
+ /*
         __block typeof(self)mv = self;
         [self.photoView sd_setImageWithURL:[NSURL URLWithString:photoM.url] placeholderImage:NULL options:SDWebImageRetryFailed | SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             
@@ -200,6 +201,7 @@
                 }
             }
         }];
+ */
     }
 }
 
