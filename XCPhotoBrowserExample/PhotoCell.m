@@ -18,11 +18,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
    
-    for (int i = 10; i<15; i++) {
-        
+    for (int i = 10; i < 14; i ++)
+    {
         UIImageView *imgView = [self.contentView viewWithTag:i];
-
-        
         [imgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickImg:)]];
     }
 }
@@ -41,31 +39,17 @@
 {
     _urls = urls;
     
-    for (int i = 0; i<urls.count; i++) {
-        
+    for (int i = 0; i<4; i++)
+    {
         UIImageView *imgView = [self.contentView viewWithTag:i+10];
         
-        [imgView sd_setImageWithURL:[NSURL URLWithString:urls[i]]];
+        NSString *url = urls[i];
+                
+        [imgView sd_setImageWithURL:[NSURL URLWithString:url]];
     }
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

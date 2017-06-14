@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,27 +28,20 @@
                     <imageView clipsSubviews="YES" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-fu-8gS">
                         <rect key="frame" x="100" y="8" width="79" height="75"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" tag="12" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Qs-yD-JJs">
-                        <rect key="frame" x="187" y="8" width="79" height="75"/>
-                    </imageView>
-                    <imageView clipsSubviews="YES" tag="13" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bO-wU-1BT">
+                    <imageView clipsSubviews="YES" tag="12" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0bO-wU-1BT">
                         <rect key="frame" x="13" y="91" width="79" height="75"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" tag="14" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-un-jen">
+                    <imageView clipsSubviews="YES" tag="13" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-un-jen">
                         <rect key="frame" x="100" y="91" width="79" height="75"/>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dE2-un-jen" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="090-wS-8rW"/>
-                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="centerY" secondItem="RP0-gp-Jog" secondAttribute="centerY" id="0x0-8q-xFP"/>
                     <constraint firstItem="dMy-fu-8gS" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="1uQ-Ma-j1K"/>
                     <constraint firstAttribute="bottom" secondItem="0bO-wU-1BT" secondAttribute="bottom" constant="3.5" id="3EU-5Q-Qcp"/>
                     <constraint firstItem="dE2-un-jen" firstAttribute="leading" secondItem="0bO-wU-1BT" secondAttribute="trailing" constant="8" id="AYc-0v-D0l"/>
                     <constraint firstItem="dMy-fu-8gS" firstAttribute="centerY" secondItem="RP0-gp-Jog" secondAttribute="centerY" id="BQ2-Mr-MIf"/>
                     <constraint firstItem="dMy-fu-8gS" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="Ouc-1q-udj"/>
-                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="V6y-nB-uwy"/>
-                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="leading" secondItem="dMy-fu-8gS" secondAttribute="trailing" constant="8" id="WFI-dK-nAJ"/>
-                    <constraint firstItem="3Qs-yD-JJs" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="Wgj-qh-pKh"/>
                     <constraint firstItem="0bO-wU-1BT" firstAttribute="height" secondItem="RP0-gp-Jog" secondAttribute="height" id="aI5-NS-Lo8"/>
                     <constraint firstItem="dMy-fu-8gS" firstAttribute="leading" secondItem="RP0-gp-Jog" secondAttribute="trailing" constant="8" id="bkC-k8-P2r"/>
                     <constraint firstItem="0bO-wU-1BT" firstAttribute="width" secondItem="RP0-gp-Jog" secondAttribute="width" id="fZz-ba-xvT"/>

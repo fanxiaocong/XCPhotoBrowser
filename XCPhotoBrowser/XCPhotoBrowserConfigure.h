@@ -17,17 +17,18 @@
 
 @interface XCPhotoBrowserConfigure : NSObject
 
-/** 👀 原视图 上、下、左、右的间距 👀 */
+/**
+ *  原视图 上、下、左、右的间距：默认(5, 5, 0, 0)
+ *
+ *  注：只有前面两个参数（上、左）有效，只需设置前面两个参数
+ */
 @property (assign, nonatomic) UIEdgeInsets photoViewEdgeInsets;
-/** 👀 行间距 👀 */
+/** 👀 行间距：默认 5 👀 */
 @property (assign, nonatomic) CGFloat photoViewRowMargin;
-/** 👀 列间距 👀 */
+/** 👀 列间距：默认 5👀 */
 @property (assign, nonatomic) CGFloat photoViewColumnMargin;
-/** 👀 列数 👀 */
+/** 👀 列数：默认 3 👀 */
 @property (assign, nonatomic) NSInteger column;
-/** 👀 可见图片的数量 （当前可见的图片的数量，默认是全部图片都可见。注：可见的图片是带有缩放效果的图片，不可见的图片是不带有缩放效果的图片） 👀 */
-@property (assign, nonatomic) NSInteger visibleCount;
-
 
 /**
  默认配置

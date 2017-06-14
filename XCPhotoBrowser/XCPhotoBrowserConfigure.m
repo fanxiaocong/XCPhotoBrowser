@@ -22,11 +22,10 @@
 {
     XCPhotoBrowserConfigure *configure = [[XCPhotoBrowserConfigure alloc] init];
     
-    configure.photoViewEdgeInsets   = UIEdgeInsetsMake(8, 13, 13, 15);
-    configure.photoViewRowMargin    = 8;
-    configure.photoViewColumnMargin = 8;
+    configure.photoViewEdgeInsets   = UIEdgeInsetsMake(5, 5, 0, 0);
+    configure.photoViewRowMargin    = 5;
+    configure.photoViewColumnMargin = 5;
     configure.column = 3;
-    configure.visibleCount = 5;
     
     return configure;
 }
