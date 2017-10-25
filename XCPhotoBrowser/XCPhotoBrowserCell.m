@@ -12,7 +12,9 @@
 
 #import "UIView+Extension.h"
 
-#import "UIImageView+WebCache.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIView+WebCache.h>
+#import <SDWebImage/UIImage+GIF.h>
 
 
 /// 圆形进度圈的半径
@@ -269,10 +271,10 @@
 {
     _imgDidLoad = NO;
     [_imgView sd_cancelCurrentImageLoad];
-    
+        
     __weak typeof(self)weakSelf = self;
     
-    [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:kNilOptions progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:kNilOptions progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         
         if (!weakSelf) return;
         CGFloat progress = receivedSize / (float)expectedSize;
@@ -281,7 +283,7 @@
         weakSelf.progressLayer.hidden = NO;
         weakSelf.progressLayer.strokeEnd = progress;
         
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         
         if (!self) return;
         weakSelf.progressLayer.hidden = YES;
@@ -293,6 +295,28 @@
             [weakSelf resizeSubviewSize];
         }
     }];
+    
+//    [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:kNilOptions progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//
+//        if (!weakSelf) return;
+//        CGFloat progress = receivedSize / (float)expectedSize;
+//        progress = progress < 0.01 ? 0.01 : progress > 1 ? 1 : progress;
+//        if (isnan(progress)) progress = 0;
+//        weakSelf.progressLayer.hidden = NO;
+//        weakSelf.progressLayer.strokeEnd = progress;
+//
+//    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//
+//        if (!self) return;
+//        weakSelf.progressLayer.hidden = YES;
+//        weakSelf.contentScrollView.maximumZoomScale = kMaxZoomScale;
+//        if (image)
+//        {
+//            self->_imgDidLoad = YES;
+//
+//            [weakSelf resizeSubviewSize];
+//        }
+//    }];
     
     [self resizeSubviewSize];
 }

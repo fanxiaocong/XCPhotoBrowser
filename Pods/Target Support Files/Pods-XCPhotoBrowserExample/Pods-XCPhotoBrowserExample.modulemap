@@ -1,0 +1,6 @@
+framework module Pods_XCPhotoBrowserExample {
+  umbrella header "Pods-XCPhotoBrowserExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
