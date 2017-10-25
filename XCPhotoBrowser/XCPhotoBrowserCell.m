@@ -274,17 +274,20 @@
         
     __weak typeof(self)weakSelf = self;
     
-    [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:kNilOptions progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         
         if (!weakSelf) return;
         CGFloat progress = receivedSize / (float)expectedSize;
         progress = progress < 0.01 ? 0.01 : progress > 1 ? 1 : progress;
         if (isnan(progress)) progress = 0;
-        weakSelf.progressLayer.hidden = NO;
-        weakSelf.progressLayer.strokeEnd = progress;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.progressLayer.hidden = NO;
+            weakSelf.progressLayer.strokeEnd = progress;
+        });
         
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        
+                
         if (!self) return;
         weakSelf.progressLayer.hidden = YES;
         weakSelf.contentScrollView.maximumZoomScale = kMaxZoomScale;
