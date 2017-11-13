@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "XCPhotoBrowser"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "PhotoBrowser"
 
   s.description  = "PhotoBrowser封装自定义图片浏览器"
