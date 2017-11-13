@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.frameworks   =  'UIKit'
  
-  s.dependency 'SDWebImage', '~> 4.1.2' 
+  s.dependency 'SDWebImage', '~> 4.2.1' 
 
 end
