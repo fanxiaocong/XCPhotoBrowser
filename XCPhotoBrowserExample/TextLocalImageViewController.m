@@ -77,12 +77,15 @@
     
     NSInteger index = (imgView.tag - 10);
     
+    XCPhotoBrowserConfigure *config = [XCPhotoBrowserConfigure defaultConfigure];
+    config.photoViewEdgeInsets = UIEdgeInsetsMake(5, 5, 0, 0);
+    
     /// 图片浏览 --- 本地
     [XCPhotoBrowserManager showFromViewController:self.navigationController
                                     selectedIndex:index
                                  seletedImageView:imgView
                                            images:self.imgsArr
-                                        configure:NULL];
+                                        configure:config];
 }
 
 @end
