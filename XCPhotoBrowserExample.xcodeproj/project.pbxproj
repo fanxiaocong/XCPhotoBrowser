@@ -283,7 +283,6 @@
 				1E1011891E67F3D300C3A1B9 /* Frameworks */,
 				1E10118A1E67F3D300C3A1B9 /* Resources */,
 				C43CEDDF1B97E1FB2E33E2C3 /* [CP] Embed Pods Frameworks */,
-				317E8ECCC024E6DF128538D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -302,8 +301,6 @@
 				1E1011A11E67F3D300C3A1B9 /* Sources */,
 				1E1011A21E67F3D300C3A1B9 /* Frameworks */,
 				1E1011A31E67F3D300C3A1B9 /* Resources */,
-				9FCFF19FD3ED8D5CB949C4DD /* [CP] Embed Pods Frameworks */,
-				BD90D826E0DD4C50BA8ADA89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -323,8 +320,6 @@
 				1E1011AC1E67F3D300C3A1B9 /* Sources */,
 				1E1011AD1E67F3D300C3A1B9 /* Frameworks */,
 				1E1011AE1E67F3D300C3A1B9 /* Resources */,
-				5A7CFD9C96AD24394DB8E6C0 /* [CP] Embed Pods Frameworks */,
-				7BCE55D42F45D8CF5A0E85AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -455,51 +450,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		317E8ECCC024E6DF128538D2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExample/Pods-XCPhotoBrowserExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A7CFD9C96AD24394DB8E6C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExampleUITests/Pods-XCPhotoBrowserExampleUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7BCE55D42F45D8CF5A0E85AA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExampleUITests/Pods-XCPhotoBrowserExampleUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		90F86F5364414B660501E6B5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,43 +468,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9FCFF19FD3ED8D5CB949C4DD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExampleTests/Pods-XCPhotoBrowserExampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BD90D826E0DD4C50BA8ADA89 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExampleTests/Pods-XCPhotoBrowserExampleTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C43CEDDF1B97E1FB2E33E2C3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExample/Pods-XCPhotoBrowserExample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-XCPhotoBrowserExample/Pods-XCPhotoBrowserExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -563,7 +483,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XCPhotoBrowserExample/Pods-XCPhotoBrowserExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XCPhotoBrowserExample/Pods-XCPhotoBrowserExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

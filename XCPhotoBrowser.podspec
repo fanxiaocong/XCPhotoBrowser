@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "XCPhotoBrowser"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "PhotoBrowser"
 
   s.description  = "PhotoBrowser封装自定义图片浏览器"
@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.frameworks   =  'UIKit'
  
-  s.dependency 'SDWebImage', '~> 4.2.1' 
+  s.dependency 'SDWebImage', '~> 5.7.2' 
 
 end
