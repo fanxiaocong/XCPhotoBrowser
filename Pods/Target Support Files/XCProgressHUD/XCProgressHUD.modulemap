@@ -1,0 +1,6 @@
+framework module XCProgressHUD {
+  umbrella header "XCProgressHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -19,15 +19,12 @@
 #define kCellPadding    0
 
 #import "XCPhotoBrowserController.h"
-
 #import "XCPhotoBrowserCell.h"
-
 #import "XCPhotoBrowserModel.h"
-
 #import "XCPhotoBrowserConfigure.h"
-
 #import "UIView+Extension.h"
 
+#import <XCProgressHUD/UIView+XCProgressHUD.h>
 
 @interface XCPhotoBrowserController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -36,6 +33,9 @@
 @property (weak, nonatomic) UIPageControl *pageCtl;
 /** 👀 蒙板 👀 */
 @property (weak, nonatomic) UIVisualEffectView *maskBgView;
+@property (weak, nonatomic) UIImageView *bottomMask;
+@property (weak, nonatomic) UIButton *closeButton;
+@property (weak, nonatomic) UIButton *downloadButton;
 
 /** 👀 图片数组模型 👀 */
 @property (strong, nonatomic) NSMutableArray<XCPhotoBrowserModel *> *photoModels;
@@ -82,8 +82,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
 
 - (NSMutableArray *)photoModels
 {
-    if (_photoModels == nil)
-    {
+    if (_photoModels == nil) {
         _photoModels = [NSMutableArray array];
     }
     return _photoModels;
@@ -101,13 +100,10 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     _isDismissing = YES;
     
     /// 设置数据模型
-    if (self.urls.count)
-    {
+    if (self.urls.count) {
         /// 加载 图片URL数组
         [self loadURLData];
-    }
-    else
-    {
+    } else {
         /// 加载本地图片
         [self loadLocalImagesData];
     }
@@ -116,7 +112,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
-    layout.itemSize           = CGSizeMake(K_SCREEN_WIDTH, K_SCREEN_HEIGHT);
+    layout.itemSize = CGSizeMake(K_SCREEN_WIDTH, K_SCREEN_HEIGHT);
     
     UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     
@@ -143,6 +139,32 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     self.pageCtl.numberOfPages = self.photoModels.count;
     self.pageCtl.currentPage   = self.selectedIndex;
     [self.view addSubview:pageCtl];
+    
+    /// 关闭按钮
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.closeButton = closeButton;
+    closeButton.frame = CGRectMake(30, 60, 50, 50);
+    closeButton.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.45f];
+    closeButton.layer.cornerRadius = 25;
+    closeButton.layer.masksToBounds = YES;
+    [closeButton setImage:[self getImage:@"icon_close"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:closeButton];
+    
+    /// 底部蒙板
+    UIImageView *bottomMask = [[UIImageView alloc] initWithImage:[self getImage:@"mengb"]];
+    self.bottomMask = bottomMask;
+    bottomMask.frame = CGRectMake(0, K_SCREEN_HEIGHT - 120, K_SCREEN_WIDTH, 120);
+    [self.view addSubview:bottomMask];
+    
+    /// 下载按钮
+    UIButton *downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.downloadButton = downloadButton;
+    [downloadButton setImage:[self getImage:@"xiazai-nor"] forState:UIControlStateNormal];
+    [downloadButton setImage:[self getImage:@"xiazai-hl"] forState:UIControlStateHighlighted];
+    downloadButton.frame = CGRectMake(K_SCREEN_WIDTH - 75, K_SCREEN_HEIGHT - 75, 40, 40);
+    [downloadButton addTarget:self action:@selector(clickDownloadButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:downloadButton];
     
     /// 添加滑动手势
     [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)]];
@@ -177,13 +199,25 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     
     /// 显示 透明度改变的 动画
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
-        
         self.maskBgView.alpha = 1;
-        
     } completion:NULL];
 }
 
 #pragma mark - 🔒 👀 Privite Method 👀
+
+/**
+ *  获取图片
+ *
+ *  @param imageName 图片名
+ */
+- (UIImage *)getImage:(NSString *)imageName
+{
+    NSInteger scale = [UIScreen mainScreen].scale;
+    NSBundle *currentBundle = [NSBundle bundleForClass:[self class]];
+    NSString *bundleName =  @"resource.bundle";
+    NSString *imagePath  = [currentBundle pathForResource: [NSString stringWithFormat:@"%@@%zdx", imageName, scale] ofType:@"png" inDirectory:bundleName];
+    return [UIImage imageWithContentsOfFile:imagePath];
+}
 
 /**
  *  加载图片URL数据
@@ -198,8 +232,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
         photoM.url = url;
         
         /// 如果存在缩略图片，则添加占位的缩略图片
-        if (weakSelf.images.count > idx)
-        {
+        if (weakSelf.images.count > idx) {
             photoM.image = weakSelf.images[idx];
         }
         
@@ -214,9 +247,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
 - (void)loadLocalImagesData
 {
     __block typeof(self)weakSelf = self;
-    
     [self.images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop) {
-        
         XCPhotoBrowserModel *photoM = [[XCPhotoBrowserModel alloc] init];
         photoM.image = image;
         [weakSelf addPhotoModel:photoM atIndex:idx];
@@ -234,7 +265,6 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     // 如果 当前选择的图片的下标为 遍历到的下标
     photoM.isFromSourceFrame = (index == self.selectedIndex);
     
-    
     ///----- 计算 对应下标的图片在当前屏幕中的 frame
     // 获取对应下标的图片在其父视图中的frame
     CGFloat newW = self.selectedPhotoView.width;
@@ -248,8 +278,11 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     CGFloat parentViewInScreenY = parentViewInScreenFrame.origin.y;
     
     // 源图片视图在当前屏幕中的frame
+    if (photoM.isFromSourceFrame && self.selectedPhotoView) {
+        newX = CGRectGetMinX(self.selectedPhotoView.frame);
+        newY = CGRectGetMinY(self.selectedPhotoView.frame);
+    }
     photoM.sourcePhotoF = CGRectMake(newX + parentViewInScreenX, newY + parentViewInScreenY, newW, newH);
-    
     
     // 标记当前浏览到的图片与缩略图片的父视图是否相交
     BOOL isIntersect = CGRectIntersectsRect(parentViewInScreenFrame, photoM.sourcePhotoF);
@@ -261,6 +294,34 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
 
 #pragma mark - 🎬 👀 Action Method 👀
 
+/**
+ *  点击下载按钮的回调
+ */
+- (void)clickDownloadButtonAction
+{
+    if (!self.photoModels.count)    return;
+    NSInteger index = self.selectedIndex;
+    if (index == NSNotFound || index < 0 || index >= self.photoModels.count) {
+        index = 0;
+    }
+    XCPhotoBrowserModel *model = [self.photoModels objectAtIndex:index];
+    if (!model || !model.image)     return;
+    
+    // 保存到相册
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImageWriteToSavedPhotosAlbum(model.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    });
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [self.view showText:@"保存失败"];
+    } else {
+        [self.view showText:@"保存成功"];
+    }
+}
+
 #define YY_CLAMP(_x_, _low_, _high_)  (((_x_) > (_high_)) ? (_high_) : (((_x_) < (_low_)) ? (_low_) : (_x_)))
 
 /**
@@ -270,47 +331,35 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
 {
     switch (pan.state)
     {
-        case UIGestureRecognizerStateBegan:
-        {
-            if (_isDismissing)
-            {
+        case UIGestureRecognizerStateBegan: {
+            if (_isDismissing) {
                 _panGestureBeginPoint = [pan locationInView:self.view];
-            }
-            else
-            {
+            } else {
                 _panGestureBeginPoint = CGPointZero;
             }
-        } break;
-            
-        case UIGestureRecognizerStateChanged:
-        {
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
             if (_panGestureBeginPoint.x == 0 && _panGestureBeginPoint.y == 0) return;
-            
             CGPoint p = [pan locationInView:self.view];
-            
             CGFloat deltaY = p.y - _panGestureBeginPoint.y;
             self.collectView.top = deltaY;
-            
             CGFloat alphaDelta = 160;
             CGFloat alpha = (alphaDelta - fabs(deltaY) + 50) / alphaDelta;
             alpha = YY_CLAMP(alpha, 0, 1);
             [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionCurveLinear animations:^{
                 self.maskBgView.alpha = alpha;
             } completion:nil];
-            
-        } break;
-            
-        case UIGestureRecognizerStateEnded:
-        {
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
             if (_panGestureBeginPoint.x == 0 && _panGestureBeginPoint.y == 0) return;
-            
             CGPoint v = [pan velocityInView:self.view];
             CGPoint p = [pan locationInView:self.view];
             CGFloat deltaY = p.y - _panGestureBeginPoint.y;
             
             /// 如果 垂直方向的速度大于1000，或者 Y轴方向上的偏移量大于120，则消失，否则复原
-            if (fabs(v.y) > 1000 || fabs(deltaY) > 120)
-            {
+            if (fabs(v.y) > 1000 || fabs(deltaY) > 120) {
                 _isDismissing = NO;
                 
                 BOOL moveToTop = (v.y < - 50 || (v.y < 50 && deltaY < 0));
@@ -319,43 +368,34 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
                 CGFloat duration = (moveToTop ? self.collectView.bottom : self.view.height - self.collectView.top) / vy;
                 duration *= 0.8;
                 duration = YY_CLAMP(duration, 0.05, 0.3);
-                
                 [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState animations:^{
                     self.maskBgView.alpha = 0;
-                    if (moveToTop)
-                    {
+                    if (moveToTop) {
                         self.collectView.bottom = 0;
-                    }
-                    else
-                    {
+                    } else {
                         self.collectView.top = self.view.height;
                     }
                 } completion:^(BOOL finished) {
-                    
                     // 移除视图
                     [self dismissFinishedHandle];
                 }];
-            }
-            else
-            {
+            } else {
                 [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:v.y / 1000 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
                     self.collectView.top    = 0;
                     self.maskBgView.alpha   = 1;
-                } completion:^(BOOL finished) {
-                }];
+                } completion:nil];
             }
-            
-        } break;
-            
-        case UIGestureRecognizerStateCancelled :
-        {
+            break;
+        }
+        case UIGestureRecognizerStateCancelled: {
             self.collectView.top    = 0;
             self.maskBgView.alpha   = 1;
+            break;
         }
-        default:break;
+        default:
+            break;
     }
 }
-
 
 /**
  消失
@@ -363,21 +403,15 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
 - (void)dismiss
 {
     self.view.userInteractionEnabled = NO;
-    
     XCPhotoBrowserCell *cell = (XCPhotoBrowserCell *)[self.collectView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0]];
     
-    if (cell.zoomScale > 1)
-    {
-        // 如果当前 缩放比例大于 1，先缩回原来尺寸，再 消失
+    if (cell.zoomScale > 1) {
+        // 如果当前 缩放比例大于 1，先缩回原来尺寸，再消失
         cell.zoomScale = 1;
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
             [self zoomOut:cell];
         });
-    }
-    else
-    {
+    } else {
         // 消失
         [self zoomOut:cell];
     }
@@ -386,17 +420,16 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
 - (void)zoomOut:(XCPhotoBrowserCell *)cell
 {
     XCPhotoBrowserModel *photoM = cell.model;
-    
+
     /*⏰ ----- 操作 控制器上面视图的消失动画 ----- ⏰*/
     [UIView animateWithDuration:.3f animations:^{
-        
-        if (photoM.isDismissScale)
-        {
+        if (photoM.isDismissScale) {
             // 进行 缩放消失
             self.maskBgView.alpha = 0;
-        }
-        else
-        {
+            self.downloadButton.alpha = 0;
+            self.bottomMask.alpha = 0;
+            self.closeButton.alpha = 0;
+        } else {
             // 直接透明度消失
             self.view.alpha = 0;
         }
@@ -438,10 +471,8 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     cell.model = self.photoModels[indexPath.item];
     
     __block typeof(self)weakSelf = self;
-    
     // 单击手势
     cell.didTapSingleHandle = ^{
-        
         // 消失
         [weakSelf dismiss];
     };

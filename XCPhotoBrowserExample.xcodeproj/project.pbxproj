@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0E81A6247674F900F643FC /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1E0E81A5247674F900F643FC /* resource.bundle */; };
 		1E1011911E67F3D300C3A1B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1011901E67F3D300C3A1B9 /* main.m */; };
 		1E1011941E67F3D300C3A1B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1011931E67F3D300C3A1B9 /* AppDelegate.m */; };
 		1E1011971E67F3D300C3A1B9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1011961E67F3D300C3A1B9 /* ViewController.m */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		0CFAD90622B07F3CE22218F6 /* Pods-XCPhotoBrowserExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCPhotoBrowserExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-XCPhotoBrowserExampleTests/Pods-XCPhotoBrowserExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		15EE44908BB09BA2E39EB190 /* Pods-XCPhotoBrowserExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XCPhotoBrowserExampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XCPhotoBrowserExampleUITests/Pods-XCPhotoBrowserExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E0E81A5247674F900F643FC /* resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = resource.bundle; sourceTree = "<group>"; };
 		1E10118C1E67F3D300C3A1B9 /* XCPhotoBrowserExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCPhotoBrowserExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E1011901E67F3D300C3A1B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E1011921E67F3D300C3A1B9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		1E1011C21E67F41200C3A1B9 /* XCPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				1E0E81A5247674F900F643FC /* resource.bundle */,
 				1E1011C61E67F41200C3A1B9 /* UIView+Extension.h */,
 				1E1011C71E67F41200C3A1B9 /* UIView+Extension.m */,
 				1E97DBCE1EF006A200C67BAE /* XCPhotoBrowserManager.h */,
@@ -361,6 +364,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -392,6 +396,7 @@
 				1E97DBEE1EF0CDD900C67BAE /* 8.jpg in Resources */,
 				1E10119F1E67F3D300C3A1B9 /* LaunchScreen.storyboard in Resources */,
 				1E10119C1E67F3D300C3A1B9 /* Assets.xcassets in Resources */,
+				1E0E81A6247674F900F643FC /* resource.bundle in Resources */,
 				1E97DBEB1EF0CDD900C67BAE /* 5.jpg in Resources */,
 				1E10119A1E67F3D300C3A1B9 /* Main.storyboard in Resources */,
 			);
@@ -475,11 +480,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-XCPhotoBrowserExample/Pods-XCPhotoBrowserExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/XCProgressHUD/XCProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

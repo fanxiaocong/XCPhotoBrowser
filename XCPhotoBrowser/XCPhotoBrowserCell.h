@@ -25,6 +25,6 @@
  
  @param compeletionBlock 消失时的回调
  */
-- (void)dismissHandle:(void(^)())compeletionBlock;
+- (void)dismissHandle:(void(^)(void))compeletionBlock;
 
 @end

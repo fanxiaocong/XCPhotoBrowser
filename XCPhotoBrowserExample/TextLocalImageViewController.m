@@ -71,6 +71,17 @@
 
 #pragma mark - 🎬 👀 Action Method 👀
 
+- (IBAction)tapBottomPicture:(UITapGestureRecognizer *)tap
+{
+    UIImageView *imgView = (UIImageView *)tap.view;
+    [XCPhotoBrowserManager showFromViewController:self.navigationController
+                                    selectedIndex:0
+                                 seletedImageView:imgView
+                                           images:@[imgView.image]
+                                        configure:nil];
+}
+
+
 - (void)didClickImageAction:(UITapGestureRecognizer *)tap
 {
     UIImageView *imgView = (UIImageView *)tap.view;

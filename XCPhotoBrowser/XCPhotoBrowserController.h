@@ -19,19 +19,19 @@
 
 @interface XCPhotoBrowserController : UIViewController
 
-/** 👀 选中的下标的图片 👀 */
+/// 选中的图片
 @property (weak, nonatomic) UIImageView *selectedPhotoView;
-/** 选中的下标 */
+/// 选中的下标
 @property (assign, nonatomic) NSInteger selectedIndex;
-/** 源控制器 */
+/// 源控制器
 @property (weak, nonatomic) UIViewController *fromVC;
 
-/** 👀 图片 👀 */
+/// 本地图片
 @property (strong, nonatomic) NSArray<UIImage *> *images;
-/** 👀 图片URL 👀 */
+/// 图片地址
 @property (strong, nonatomic) NSArray<NSString *> *urls;
 
-/** 👀 配置参数类 👀 */
+/// 配置参数类
 @property (strong, nonatomic) XCPhotoBrowserConfigure *configure;
 
 

@@ -16,7 +16,6 @@
 #import <SDWebImage/UIView+WebCache.h>
 #import <SDWebImage/UIImage+GIF.h>
 
-
 /// 圆形进度圈的半径
 #define kCircleProgressLayerRadius 20
 /// 圆形进度圈线的宽度
@@ -39,7 +38,7 @@
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 
 /** 👀 图片是否已经加载完毕 👀 */
-@property (nonatomic, readonly) BOOL imgDidLoad;
+@property (nonatomic, assign) BOOL imgDidLoad;
 
 @end
 
@@ -48,15 +47,12 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    if (self = [super initWithFrame:frame])
-    {
+    if (self = [super initWithFrame:frame]) {
         /// 设置 UI
         [self setupUI];
-        
         // 添加 点击手势
         [self addTapGesture];
     }
-    
     return self;
 }
 
@@ -150,8 +146,7 @@
 {
     CGFloat zoomScale = self.contentScrollView.zoomScale;
     
-    if (zoomScale <= 1.0f)
-    {
+    if (zoomScale <= 1.0f) {
         // 放大图片
         CGPoint loc = [tap locationInView:tap.view];
         
@@ -166,9 +161,7 @@
         CGRect rect = CGRectMake(x, y, xsize, ysize);
         
         [self.contentScrollView zoomToRect:rect animated:YES];
-    }
-    else
-    {
+    } else {
         // 复原图片
         [self.contentScrollView setZoomScale:1.0f animated:YES];
     }
@@ -178,9 +171,8 @@
  *  单击手势的回调
  */
 - (void)didTapSingleHandle:(UITapGestureRecognizer *)tap
-{
-    if (self.didTapSingleHandle)
-    {
+{    
+    if (self.didTapSingleHandle) {
         self.didTapSingleHandle();
     }
 }
@@ -204,20 +196,17 @@
     _progressLayer.hidden = YES;
     [CATransaction commit];
     
-    if (!_model)
-    {
+    if (!_model) {
         _imgView.image = nil;
         return;
     }
     
-    if (![_model.image isMemberOfClass:[UIImage class]])
-    {
+    if (![_model.image isMemberOfClass:[UIImage class]]) {
         _model.image = nil;
     }
     
     /// 如果是 从上一个页面放大显示出来（图片的过渡动画）
-    if (_model.isFromSourceFrame)
-    {
+    if (_model.isFromSourceFrame) {
         _imgView.image = _model.image;
         _imgView.frame = _model.sourcePhotoF;
         /// 更新标记
@@ -227,19 +216,14 @@
         
         /// 图片缩放（过渡）动画
         [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-           
             /// 更新 imgView 的 frame
             _imgView.frame = toF;
-            
         } completion:^(BOOL finished) {
-
             /// 加载图片数据
             [self loadImageData];
         }];
-        
         return;
     }
-    
     
     /// 加载图片数据
     [self loadImageData];
@@ -252,13 +236,10 @@
  */
 - (void)loadImageData
 {
-    if (_model.url)
-    {
+    if (_model.url) {
         /// 加载图片地址
         [self loadURLImage];
-    }
-    else
-    {
+    } else {
         /// 加载本地图片
         [self loadLocalImage];
     }
@@ -275,7 +256,6 @@
     __weak typeof(self)weakSelf = self;
     
     [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        
         if (!weakSelf) return;
         CGFloat progress = receivedSize / (float)expectedSize;
         progress = progress < 0.01 ? 0.01 : progress > 1 ? 1 : progress;
@@ -285,41 +265,16 @@
             weakSelf.progressLayer.hidden = NO;
             weakSelf.progressLayer.strokeEnd = progress;
         });
-        
     } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                
-        if (!self) return;
+        if (!weakSelf) return;
         weakSelf.progressLayer.hidden = YES;
         weakSelf.contentScrollView.maximumZoomScale = kMaxZoomScale;
-        if (image)
-        {
-            self->_imgDidLoad = YES;
-            
+        if (image) {
+            weakSelf.imgDidLoad = YES;
+            weakSelf.model.image = image;
             [weakSelf resizeSubviewSize];
         }
     }];
-    
-//    [_imgView sd_setImageWithURL:[NSURL URLWithString:self.model.url] placeholderImage:_model.image options:kNilOptions progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//
-//        if (!weakSelf) return;
-//        CGFloat progress = receivedSize / (float)expectedSize;
-//        progress = progress < 0.01 ? 0.01 : progress > 1 ? 1 : progress;
-//        if (isnan(progress)) progress = 0;
-//        weakSelf.progressLayer.hidden = NO;
-//        weakSelf.progressLayer.strokeEnd = progress;
-//
-//    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//
-//        if (!self) return;
-//        weakSelf.progressLayer.hidden = YES;
-//        weakSelf.contentScrollView.maximumZoomScale = kMaxZoomScale;
-//        if (image)
-//        {
-//            self->_imgDidLoad = YES;
-//
-//            [weakSelf resizeSubviewSize];
-//        }
-//    }];
     
     [self resizeSubviewSize];
 }
@@ -362,14 +317,11 @@
     UIImage *image = _imgView.image;
     
      /// 以当前屏幕宽度为基准，高度自适应
-    if (image.size.height / image.size.width > self.height / self.width)
-    {
+    if (image.size.height / image.size.width > self.height / self.width) {
         /// 当前图片的高度与宽度的比例 > 当前屏幕的高度与宽度的比例
         /// 当前图片容器视图的高度 以 图片的高度为基准
         contentF.size.height = floor(image.size.height / (image.size.width / self.width));
-    }
-    else
-    {
+    } else {
         CGFloat height = image.size.height / image.size.width * self.width;
         if (height < 1 || isnan(height)) height = self.height;
         height = floor(height);
@@ -377,8 +329,7 @@
         contentF.origin.y    = (self.height - height) * 0.5;
     }
     
-    if (contentF.size.height > self.height && contentF.size.height - self.height <= 1)
-    {
+    if (contentF.size.height > self.height && contentF.size.height - self.height <= 1) {
         contentF.size.height = self.height;
     }
     
@@ -386,12 +337,9 @@
     self.contentScrollView.contentSize = CGSizeMake(self.width, MAX(contentF.size.height, self.height));
     [self.contentScrollView scrollRectToVisible:self.bounds animated:NO];
     
-    if (contentF.size.height <= self.height)
-    {
+    if (contentF.size.height <= self.height) {
         self.contentScrollView.alwaysBounceVertical = NO;
-    }
-    else
-    {
+    } else {
         self.contentScrollView.alwaysBounceVertical = YES;
     }
     
@@ -405,41 +353,29 @@
  
  @param compeletionBlock 消失时的回调
  */
-- (void)dismissHandle:(void(^)())compeletionBlock
+- (void)dismissHandle:(void(^)(void))compeletionBlock
 {
     // 显示 原视图
-    if (self.model.isDismissScale)
-    {
+    if (self.model.isDismissScale) {
         // 缩放消失
         [UIView animateWithDuration:.3f animations:^{
-            
             self.imgView.frame = self.model.sourcePhotoF;
-            
         } completion:^(BOOL finished) {
-            
             // 回调 block
-            if (finished  && compeletionBlock)
-            {
+            if (finished  && compeletionBlock) {
                 // 动画完成时的回调
                 compeletionBlock();
             }
         }];
-    }
-    else
-    {
+    } else {
         // 放大消失
         [UIView animateWithDuration:.3f animations:^{
-            
             self.imgView.alpha = 0;
             self.imgView.transform = CGAffineTransformMakeScale(2, 2);
-            
         } completion:^(BOOL finished) {
-            
             self.imgView.hidden = YES;
-            
             // 回调 block
-            if (finished  && compeletionBlock)
-            {
+            if (finished  && compeletionBlock) {
                 // 动画完成时的回调
                 compeletionBlock();
             }

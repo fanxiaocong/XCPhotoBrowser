@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MP6-a5-ruE">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MP6-a5-ruE">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRO-ao-lwK">
-                                <rect key="frame" x="50" y="164" width="80" height="30"/>
+                                <rect key="frame" x="50" y="144" width="80" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="RHd-5m-rt7"/>
                                     <constraint firstAttribute="width" constant="80" id="sVs-0O-4Yy"/>
@@ -33,7 +31,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aF6-Nw-t5X">
-                                <rect key="frame" x="245" y="164" width="80" height="30"/>
+                                <rect key="frame" x="245" y="144" width="80" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="SHa-hY-Skc"/>
                                     <constraint firstAttribute="height" constant="30" id="sbp-Fs-xLu"/>
@@ -71,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pyk-Dl-K9X">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="MgB-f8-xaW" id="QVM-HP-2Te"/>
@@ -108,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ch-xV-6K0">
-                                <rect key="frame" x="37" y="184" width="300" height="300"/>
+                                <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="16" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ugV-hF-XrP">
                                         <rect key="frame" x="5" y="201.5" width="93.5" height="93.5"/>
@@ -180,11 +178,24 @@
                                     <constraint firstItem="rib-m4-UGu" firstAttribute="width" secondItem="AcJ-UU-sZR" secondAttribute="width" id="zPC-R6-1jY"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="00G-q2-fA8">
+                                <rect key="frame" x="141" y="543.5" width="93" height="93.5"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="93" id="IWm-R2-zfM"/>
+                                    <constraint firstAttribute="height" constant="93.5" id="jRj-3k-mdz"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="FsK-Cq-1Y6" appends="YES" id="y9r-iP-BkZ"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1Ch-xV-6K0" firstAttribute="centerY" secondItem="Rln-08-oFV" secondAttribute="centerY" id="PJ5-oe-Tw1"/>
+                            <constraint firstItem="00G-q2-fA8" firstAttribute="centerX" secondItem="Rln-08-oFV" secondAttribute="centerX" id="Zyk-QY-2tM"/>
                             <constraint firstItem="1Ch-xV-6K0" firstAttribute="centerX" secondItem="Rln-08-oFV" secondAttribute="centerX" id="a1b-u4-X9d"/>
+                            <constraint firstItem="roY-k9-7Hz" firstAttribute="top" secondItem="00G-q2-fA8" secondAttribute="bottom" constant="30" id="i8J-Bz-dab"/>
                         </constraints>
                     </view>
                     <connections>
@@ -192,6 +203,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtb-r6-3oq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="FsK-Cq-1Y6">
+                    <connections>
+                        <action selector="tapBottomPicture:" destination="iEp-GM-Okk" id="QMS-14-EML"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1232.8" y="463.71814092953525"/>
         </scene>
@@ -217,8 +233,8 @@
     <resources>
         <image name="1.jpg" width="2560" height="1600"/>
         <image name="2.jpg" width="2560" height="1600"/>
-        <image name="3.jpg" width="2560" height="1600"/>
-        <image name="4.jpg" width="2560" height="1600"/>
+        <image name="3.jpg" width="1920" height="1200"/>
+        <image name="4.jpg" width="526.62860107421875" height="329.14285278320312"/>
         <image name="5.jpg" width="2560" height="1600"/>
         <image name="6.jpg" width="2560" height="1600"/>
         <image name="7.jpg" width="2560" height="1600"/>

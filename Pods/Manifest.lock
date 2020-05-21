@@ -1,18 +1,26 @@
 PODS:
-  - SDWebImage (5.7.2):
-    - SDWebImage/Core (= 5.7.2)
-  - SDWebImage/Core (5.7.2)
+  - JGProgressHUD (2.0.4)
+  - SDWebImage (5.8.0):
+    - SDWebImage/Core (= 5.8.0)
+  - SDWebImage/Core (5.8.0)
+  - XCProgressHUD (0.0.4):
+    - JGProgressHUD (~> 2.0.2)
 
 DEPENDENCIES:
-  - SDWebImage (~> 5.7.2)
+  - SDWebImage (~> 5.8.0)
+  - XCProgressHUD (~> 0.0.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - JGProgressHUD
     - SDWebImage
+    - XCProgressHUD
 
 SPEC CHECKSUMS:
-  SDWebImage: d9ea4959d99c52276dfada481987018fcaea3d58
+  JGProgressHUD: 62658b14e72cccf179efc7a13bcb54d30b92fc22
+  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
+  XCProgressHUD: 1553a22a8c70856557a8509edcf06271e98ff3fa
 
-PODFILE CHECKSUM: c1bc96ceb88a339984fe74c4047436c1338d39ce
+PODFILE CHECKSUM: b43dca758841354f76678da5ea91a41c0ed5b241
 
 COCOAPODS: 1.6.0
