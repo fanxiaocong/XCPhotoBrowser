@@ -292,6 +292,17 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     [self.photoModels addObject:photoM];
 }
 
+/**
+ *  改变子视图透明度
+ */
+- (void)_changeSubViewsAlpha:(CGFloat)alpha
+{
+    self.maskBgView.alpha = alpha;
+    self.downloadButton.alpha = alpha;
+    self.bottomMask.alpha = alpha;
+    self.closeButton.alpha = alpha;
+}
+
 #pragma mark - 🎬 👀 Action Method 👀
 
 /**
@@ -348,7 +359,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
             CGFloat alpha = (alphaDelta - fabs(deltaY) + 50) / alphaDelta;
             alpha = YY_CLAMP(alpha, 0, 1);
             [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionCurveLinear animations:^{
-                self.maskBgView.alpha = alpha;
+                [self _changeSubViewsAlpha:alpha];
             } completion:nil];
             break;
         }
@@ -369,7 +380,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
                 duration *= 0.8;
                 duration = YY_CLAMP(duration, 0.05, 0.3);
                 [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState animations:^{
-                    self.maskBgView.alpha = 0;
+                    [self _changeSubViewsAlpha:0];
                     if (moveToTop) {
                         self.collectView.bottom = 0;
                     } else {
@@ -382,14 +393,14 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
             } else {
                 [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.9 initialSpringVelocity:v.y / 1000 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
                     self.collectView.top    = 0;
-                    self.maskBgView.alpha   = 1;
+                    [self _changeSubViewsAlpha:1];
                 } completion:nil];
             }
             break;
         }
         case UIGestureRecognizerStateCancelled: {
             self.collectView.top    = 0;
-            self.maskBgView.alpha   = 1;
+            [self _changeSubViewsAlpha:1];
             break;
         }
         default:
@@ -425,10 +436,7 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     [UIView animateWithDuration:.3f animations:^{
         if (photoM.isDismissScale) {
             // 进行 缩放消失
-            self.maskBgView.alpha = 0;
-            self.downloadButton.alpha = 0;
-            self.bottomMask.alpha = 0;
-            self.closeButton.alpha = 0;
+            [self _changeSubViewsAlpha:0];
         } else {
             // 直接透明度消失
             self.view.alpha = 0;
