@@ -23,5 +23,6 @@ Pod::Spec.new do |s|
   s.frameworks   =  'UIKit'
  
   s.dependency 'SDWebImage', '~> 5.7.2' 
+  s.dependency 'XCProgressHUD', '~> 0.0.4'
 
 end
