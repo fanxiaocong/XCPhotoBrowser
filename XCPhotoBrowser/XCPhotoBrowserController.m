@@ -24,6 +24,7 @@
 #import "XCPhotoBrowserConfigure.h"
 #import "UIView+Extension.h"
 
+#import <Photos/Photos.h>
 #import <XCProgressHUD/UIView+XCProgressHUD.h>
 
 @interface XCPhotoBrowserController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -303,6 +304,36 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     self.closeButton.alpha = alpha;
 }
 
+- (void)_canVisitPhotoLibrary:(void(^)(BOOL))result
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusAuthorized) {
+        result(YES);
+        return;
+    }
+    if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
+        result(NO);
+        return ;
+    }
+    
+    if (status == PHAuthorizationStatusNotDetermined) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            // 回调是在子线程的
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (status != PHAuthorizationStatusAuthorized) {
+                      result(NO);
+                      return ;
+                  }
+                  result(YES);
+            });
+  
+        }];
+    }
+    
+}
+
+
+
 #pragma mark - 🎬 👀 Action Method 👀
 
 /**
@@ -319,9 +350,16 @@ static NSString * const cellIdentifier = @"XCPhotoBrowserCell";
     if (!model || !model.image)     return;
     
     // 保存到相册
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImageWriteToSavedPhotosAlbum(model.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    });
+    __weak typeof(self)weakSelf = self;
+    [self _canVisitPhotoLibrary:^(BOOL allow) {
+        if (allow) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImageWriteToSavedPhotosAlbum(model.image, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+            });
+        } else {
+            NSLog(@"您还未开启相册权限，请到设置中开启");
+        }
+    }];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

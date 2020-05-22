@@ -85,9 +85,7 @@
 - (void)didClickImageAction:(UITapGestureRecognizer *)tap
 {
     UIImageView *imgView = (UIImageView *)tap.view;
-    
     NSInteger index = (imgView.tag - 10);
-    
     XCPhotoBrowserConfigure *config = [XCPhotoBrowserConfigure defaultConfigure];
     config.photoViewEdgeInsets = UIEdgeInsetsMake(5, 5, 0, 0);
     

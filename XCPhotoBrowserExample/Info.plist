@@ -7,10 +7,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>访问相册</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>访问相册</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
